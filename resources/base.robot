@@ -6,8 +6,10 @@ Library    String
 Library    OperatingSystem
 Library    Collections
 Library    factories/login.py
+Library    factories/usuarios.py
 
 Resource    routes/login.robot
+Resource    routes/usuarios.robot
 Resource    helpers.robot
 
 ***Variables***
