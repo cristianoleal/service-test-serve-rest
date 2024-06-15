@@ -5,12 +5,13 @@ Library    Browser
 Library    String
 Library    OperatingSystem
 Library    Collections
+Library    factories/login.py
 
-Resource    routes/billOfMaterials.robot
+Resource    routes/login.robot
 Resource    helpers.robot
 
 ***Variables***
 
 ${base_url}    ${localhost}
 
-${localhost}    http://localhost:51156
+${localhost}    http://localhost:3000
