@@ -6,15 +6,15 @@ Resource    ${EXECDIR}/resources/base.robot
 ***Test Cases***
 Deve Consultar Pelo Nome Usuario
     [Tags]    SmokeTest
-    &{params}    Create Dictionary    nome=admin
+    &{params}    Create Dictionary    nome=fulano
 
     ${response}    Get Usuarios    params=${params}
 
     Status Should Be              200                                               ${response}
     Should Be Equal As Numbers    ${response.json()}[quantidade]                    1
-    Should Be Equal               ${response.json()}[usuarios][0][nome]             Admin
-    Should Be Equal               ${response.json()}[usuarios][0][email]            admin@admin.com
-    Should Be Equal               ${response.json()}[usuarios][0][password]         admin
+    Should Be Equal               ${response.json()}[usuarios][0][nome]             Fulano da Silva
+    Should Be Equal               ${response.json()}[usuarios][0][email]            Fulano da Silva
+    Should Be Equal               ${response.json()}[usuarios][0][password]         teste
     Should Be Equal               ${response.json()}[usuarios][0][administrador]    true
     Should Be Equal               ${response.json()}[usuarios][0][_id]              0uxuPY0cbmQhpEz1
 
