@@ -1,0 +1,55 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  SERVEREST_REPO: 'https://github.com/ServeRest/ServeRest.git'
+  SERVEREST_BRANCH: 'trunk'
+  SERVEREST_PORT: 3000
+
+jobs:
+- job: BuildAndTest
+  displayName: 'Build and Test'
+  steps:
+
+  - checkout: self
+
+  - script: |
+      git clone $(SERVEREST_REPO) ServeRest
+    displayName: 'Clone ServeRest repository'
+
+  - script: |
+      cd ServeRest
+      docker build -t serverest .
+    displayName: 'Build ServeRest Docker image'
+
+  - script: |
+      docker run -d -p $(SERVEREST_PORT):3000 --name serverest serverest
+    displayName: 'Run ServeRest Docker container'
+
+  - script: |
+      echo "Waiting for ServeRest to be ready..."
+      sleep 15  # Adjust the sleep time if needed
+    displayName: 'Wait for ServeRest to be ready'
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install Python dependencies'
+
+  - script: |
+      robot -d logs -l log.html -x output-xunit.xml -i 'SmokeTest' tests
+    displayName: 'Run automated tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: "JUnit"
+      testResultsFiles: "logs/output-xunit.xml"
+    displayName: "Publish scrip
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(System.DefaultWorkingDirectory)/logs"
+      ArtifactName: "Test Logs"
+      publishLocation: "Container"

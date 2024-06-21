@@ -9,38 +9,55 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/ServeRest/ServeRest.git'
+                git branch: 'trunk', url: 'https://github.com/ServeRest/ServeRest.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
-        stage('Build') {
+        stage('Install Dependencies 2') {
             steps {
-                sh 'npm run build || echo "No build script defined"'
+                bat 'npm install -g pm2'
+                bat '"C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming\\npm\\pm2.cmd" start ./src/server.js'
             }
         }
 
-        stage('Start Server') {
+        stage('Clone Test Repository') {
             steps {
-                sh 'nohup npm start &'
-                sleep 10
+                git branch: 'main', url: 'https://github.com/cristianoleal/service-test-serverest.git'
+            }
+        }
+
+        stage('Install Python and Dependencies') {
+            steps {
+                // Instalar o Python e configurar a virtualenv
+                bat '''
+                choco install python --version=3.10.0 -y
+                python -m venv venv
+                venv\\Scripts\\activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                script {
-                    def response = sh(
-                        script: 'curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d \'{"email":"email@example.com","password":"password"}\'',
-                        returnStdout: true
-                    ).trim()
-                    echo "Response: ${response}"
-                }
+                // Ativar a virtualenv e rodar os testes
+                bat '''
+                robot -d ./logs -i SmokeTest .\\Tests\\
+                '''
+            }
+        }
+
+        stage('Finish pm2') {
+            steps {
+                bat 'npm install -g pm2'
+                bat '"C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming\\npm\\pm2.cmd" delete app'
             }
         }
     }
