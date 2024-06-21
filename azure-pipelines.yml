@@ -31,7 +31,7 @@ jobs:
 
   - script: |
       echo "Waiting for ServeRest to be ready..."
-      sleep 15  # Adjust the sleep time if needed
+      timeout /t 15  # Adjust the sleep time if needed
     displayName: 'Wait for ServeRest to be ready'
 
   - script: |
