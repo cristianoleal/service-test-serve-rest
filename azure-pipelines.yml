@@ -38,6 +38,10 @@ jobs:
       robot -d logs -l log.html -x output-xunit.xml -i SmokeTest tests
     displayName: 'Run automated tests'
 
+  - script: |
+      docker rm -f $(docker ps -a -q)
+    displayName: 'Remove all Docker containers'
+
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: "JUnit"
