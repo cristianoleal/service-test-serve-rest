@@ -5,7 +5,7 @@ Resource    ${EXECDIR}/resources/base.robot
 
 ***Test Cases***
 Deve Criar Um Novo Carrinho Com Um Produto
-    [Tags]      Test
+    [Tags]      SmokeTest
     ${headers}    Login With    fulano@qa.com    teste
 
     ${produto}     Criar Produto            Orange        5000          Smartphone    50    ${headers}
