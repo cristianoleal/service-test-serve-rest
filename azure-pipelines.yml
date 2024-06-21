@@ -30,11 +30,6 @@ jobs:
     displayName: 'Run ServeRest Docker container'
 
   - script: |
-      echo "Waiting for ServeRest to be ready..."
-      timeout /t 15  # Adjust the sleep time if needed
-    displayName: 'Wait for ServeRest to be ready'
-
-  - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
     displayName: 'Install Python dependencies'
