@@ -17,8 +17,8 @@ jobs:
   - checkout: self
 
   - script: |
-      git clone $(SERVEREST_REPO) ServeRest
-    displayName: 'Clone ServeRest repository'
+      git clone --branch $(SERVEREST_BRANCH) $(SERVEREST_REPO) ServeRest
+    displayName: 'Clone ServeRest repository (trunk branch)'
 
   - script: |
       cd ServeRest
@@ -47,9 +47,11 @@ jobs:
     inputs:
       testResultsFormat: "JUnit"
       testResultsFiles: "logs/output-xunit.xml"
-    displayName: "Publish scrip
+    displayName: "Publish test results"
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: "$(System.DefaultWorkingDirectory)/logs"
       ArtifactName: "Test Logs"
       publishLocation: "Container"
+    displayName: "Publish test logs"
