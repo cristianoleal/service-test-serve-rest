@@ -35,7 +35,7 @@ jobs:
     displayName: 'Install Python dependencies'
 
   - script: |
-      robot -d logs -l log.html -x output-xunit.xml -i 'SmokeTest' tests
+      robot -d logs -l log.html -x output-xunit.xml -i SmokeTest tests
     displayName: 'Run automated tests'
 
   - task: PublishTestResults@2
