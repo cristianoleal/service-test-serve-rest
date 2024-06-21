@@ -39,7 +39,7 @@ jobs:
     displayName: 'Run automated tests'
 
   - script: |
-      docker rm -f $(docker ps -a -q)
+      powershell -Command "docker rm -f $(docker ps -a -q)"
     displayName: 'Remove all Docker containers'
 
   - task: PublishTestResults@2
