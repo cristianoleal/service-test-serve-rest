@@ -13,7 +13,7 @@ Deve Consultar Pelo Nome Usuario
     Status Should Be              200                                               ${response}
     Should Be Equal As Numbers    ${response.json()}[quantidade]                    1
     Should Be Equal               ${response.json()}[usuarios][0][nome]             Fulano da Silva
-    Should Be Equal               ${response.json()}[usuarios][0][email]            Fulano da Silva
+    Should Be Equal               ${response.json()}[usuarios][0][email]            fulano@qa.com
     Should Be Equal               ${response.json()}[usuarios][0][password]         teste
     Should Be Equal               ${response.json()}[usuarios][0][administrador]    true
     Should Be Equal               ${response.json()}[usuarios][0][_id]              0uxuPY0cbmQhpEz1
