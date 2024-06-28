@@ -50,7 +50,7 @@ Concluir Carrinho De Compra
     ${response}    Concluir Compras    ${headers}
 
     Status Should Be    200                            ${response}
-    Should Be Equal     ${response.json()}[message]    Cadastro excluído com sucesso
+    Should Be Equal     ${response.json()}[message]    Registro excluído com sucesso
 
 Cancelar Carrinho De Compra
     [Tags]    SmokeTest
