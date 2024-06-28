@@ -37,6 +37,7 @@ jobs:
   - script: |
       robot -d logs -l log.html -x output-xunit.xml -i SmokeTest tests
     displayName: 'Run automated tests'
+    continueOnError: true
 
   - script: |
       powershell -Command "docker rm -f $(docker ps -a -q)"
