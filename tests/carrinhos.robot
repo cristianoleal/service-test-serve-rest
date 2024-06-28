@@ -31,7 +31,7 @@ Deve Consultar Um Carrinho Por Id
     [Tags]    SmokeTest
     ${headers}          Login With               fulano@qa.com    teste
     Concluir Compras    ${headers}
-    ${produto}          Criar Produto            ProdutoGetId     5000          Produto    50    ${headers}
+    ${produto}          Criar Produto            Microondas     5000          Cozinha    50    ${headers}
     ${payload}          Payload Novo Carrinho    ${produto}       30
     ${post_response}    Post Carrinhos           ${payload}       ${headers}
 
@@ -41,11 +41,11 @@ Deve Consultar Um Carrinho Por Id
 
 Concluir Carrinho De Compra
     [Tags]    SmokeTest
-    ${headers}          Login With               fulano@qa.com        teste
+    ${headers}          Login With               fulano@qa.com         teste
     Concluir Compras    ${headers}
-    ${produto}          Criar Produto            Produto Concluido    5000          Produto    50    ${headers}
-    ${payload}          Payload Novo Carrinho    ${produto}           30
-    ${post_response}    Post Carrinhos           ${payload}           ${headers}
+    ${produto}          Criar Produto            Geladeira Brastemp    5000          Cozinha    50    ${headers}
+    ${payload}          Payload Novo Carrinho    ${produto}            30
+    ${post_response}    Post Carrinhos           ${payload}            ${headers}
 
     ${response}    Concluir Compras    ${headers}
 
@@ -54,11 +54,11 @@ Concluir Carrinho De Compra
 
 Cancelar Carrinho De Compra
     [Tags]    SmokeTest
-    ${headers}          Login With               fulano@qa.com        teste
+    ${headers}          Login With               fulano@qa.com    teste
     Concluir Compras    ${headers}
-    ${produto}          Criar Produto            Produto Cancelado    5000          Produto    50    ${headers}
-    ${payload}          Payload Novo Carrinho    ${produto}           30
-    ${post_response}    Post Carrinhos           ${payload}           ${headers}
+    ${produto}          Criar Produto            Radio            5000          Audio    50    ${headers}
+    ${payload}          Payload Novo Carrinho    ${produto}       30
+    ${post_response}    Post Carrinhos           ${payload}       ${headers}
 
     ${response}    Cancelar Compras    ${headers}
 
