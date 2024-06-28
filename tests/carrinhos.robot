@@ -49,7 +49,7 @@ Concluir Carrinho De Compra
 
     ${response}    Concluir Compras    ${headers}
 
-    Status Should Be    201                            ${response}
+    Status Should Be    200                            ${response}
     Should Be Equal     ${response.json()}[message]    Cadastro realizado com sucesso
 
 Cancelar Carrinho De Compra
