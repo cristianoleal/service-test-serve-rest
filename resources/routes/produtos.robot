@@ -22,6 +22,14 @@ Get Produtos
 
     RETURN    ${response}
 
+Get Produtos Por Id
+    [Arguments]    ${params}
+    ${response}    GET
+    ...            ${base_url}/produtos/${params}
+    ...            expected_status=any
+
+    RETURN    ${response}
+
 Delete Produto
     [Arguments]    ${params}    ${headers}
 

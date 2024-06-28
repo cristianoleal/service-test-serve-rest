@@ -23,6 +23,21 @@ Deve Retornar Todos Os Produto
     Status Should Be    200                                   ${response}
     Should Be True      ${response.json()}[quantidade] > 0
 
+Deve Retornar Produto Por Id
+    [Tags]    SmokeTest
+    ${nome_prod}     Set Variable    Get Produto
+    ${preco_prod}    Set Variable    5000
+    ${desc_prod}     Set Variable    Get Id
+    ${quant_prod}    Set Variable    500
+
+    ${headers}          Login With              fulano@qa.com                   teste
+    ${payload}          Payload Novo Produto    ${nome_prod}                    ${preco_prod}    ${desc_prod}    ${quant_prod}
+    ${post_response}    Post Produto            ${payload}                      ${headers}
+    ${response}         Get Produtos Por Id     ${post_response.json()}[_id]
+
+    Status Should Be    200                                   ${response}
+    Should Be True      ${response.json()}[quantidade] > 0
+
 Deve Deletar Um Produto
     [Tags]    SmokeTest
     ${nome_prod}     Set Variable    Delete Produto
@@ -39,7 +54,7 @@ Deve Deletar Um Produto
     Should Be Equal     ${response.json()}[message]    Registro excluído com sucesso
 
 Deve Alterar Um Produto
-    [Tags]    This
+    [Tags]    SmokeTest
     ${nome_prod}     Set Variable    Produto Novo
     ${preco_prod}    Set Variable    1000
     ${desc_prod}     Set Variable    descricao
