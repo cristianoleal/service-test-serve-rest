@@ -6,9 +6,8 @@ Resource    ${EXECDIR}/resources/base.robot
 ***Test Cases***
 Deve Consultar Pelo Nome Usuario
     [Tags]    SmokeTest
-    &{params}    Create Dictionary    nome=fulano
-
-    ${response}    Get Usuarios    params=${params}
+    &{params}      Create Dictionary    nome=fulano
+    ${response}    Get Usuarios         params=${params}
 
     Status Should Be              200                                               ${response}
     Should Be Equal As Numbers    ${response.json()}[quantidade]                    1
